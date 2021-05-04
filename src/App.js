@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState } from 'react';
 import './App.css';
+import './Navigation.scss';
 import { Link, Route } from 'react-router-dom';
 import products from './products';
 import { ProductList } from './ProductList/ProductList';
@@ -22,8 +23,8 @@ function App() {
 
   return (
     <div className="App">
-      <Link to="/home">Products</Link>
-      <Link to="/bag">Bag</Link>
+      <Link className="nav-link" to="/home">Products</Link>
+      <Link className="nav-link nav-link-bag" to="/bag">Bag</Link>
       <Route path="/home">
         <ProductList products={products} addGoods={addGoods} />
       </Route>
