@@ -29,6 +29,12 @@ function App() {
     addGoodsToBag((prev) => prev.filter((good) => good.id !== product.id));
   };
 
+  const reduceQuantity = (product) => {
+    if (product.quantity > 0) {
+      // const selectedProduct = goodsInBag.find((good) => product.id === good.id);
+    }
+  };
+
   return (
     <div className="App">
       <Link className="nav-link" to="/home">Products</Link>
@@ -38,6 +44,7 @@ function App() {
       </Route>
       <Route path="/bag">
         <Bag
+          reduceQuantity={reduceQuantity}
           goodsInBag={goodsInBag}
           removeProduct={removeProduct}
         />

@@ -9,10 +9,10 @@ export const ProductList = ({ products, addGoods }) => (
     {
       products.map(
         (product) => (
-          <li key={products.id}>
+          <li key={product.id}>
             <div className="product">
               <div className="product__name">{product.name}</div>
-              <img src="https://m2k.com.ua/image/cache/catalog/m2kphoto/atmosphere/krossovki_nike_m2k_tekno_atmosphere_grey_bv0074_001_1-700x700-product_popup.jpg" alt="Produc" className="product__img" />
+              <img src={product.img} alt="Product" className="product__img" />
               <div className="product__description">{product.label}</div>
               <div className="product__price">
                 {`Price: ${product.price} $`}
@@ -29,9 +29,11 @@ export const ProductList = ({ products, addGoods }) => (
 ProductList.propTypes = {
   addGoods: PropTypes.func.isRequired,
   products: PropTypes.arrayOf(
-    {
+    PropTypes.shape({
       name: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired,
-    }.isRequired,
+      price: PropTypes.number.isRequired,
+      label: PropTypes.string.isRequired,
+    }.isRequired),
   ).isRequired,
 };

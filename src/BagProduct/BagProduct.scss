@@ -1,0 +1,26 @@
+.bag-product {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  align-items: center;
+  margin: 10px 0;
+  background-color: gray;
+  &__name {
+    text-transform: uppercase;
+  }
+  &__img {
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+    margin: 0 5px;
+  }
+  &__control {
+    display: flex;
+    align-items: center;
+  }
+  &__change-quantity {
+    border-radius: 5px;
+  }
+}
+
+
