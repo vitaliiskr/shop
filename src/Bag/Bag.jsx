@@ -15,7 +15,7 @@ export const Bag = ({
   <>
     {
       goodsInBag.length < 1
-        ? (<div>Bag is empty</div>)
+        ? (<h3>Bag is empty</h3>)
         : (
           <div className="bag">
             <BagProduct
