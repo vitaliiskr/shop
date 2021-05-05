@@ -5,7 +5,13 @@ import './Bag.scss';
 
 import { BagProduct } from '../BagProduct/BagProduct';
 
-export const Bag = ({ goodsInBag, removeProduct, reduceQuantity }) => (
+export const Bag = ({
+  goodsInBag,
+  removeProduct,
+  reduceQuantity,
+  increaseQuantity,
+  clearBag,
+}) => (
   <>
     {
       goodsInBag.length < 1
@@ -16,8 +22,16 @@ export const Bag = ({ goodsInBag, removeProduct, reduceQuantity }) => (
               goodsInBag={goodsInBag}
               removeProduct={removeProduct}
               reduceQuantity={reduceQuantity}
+              increaseQuantity={increaseQuantity}
+              clearBag={clearBag}
             />
-            <button className="bag__button" type="button">Clear Bag</button>
+            <button
+              className="bag__button"
+              type="button"
+              onClick={clearBag}
+            >
+              Clear Bag
+            </button>
           </div>
         )
     }
@@ -33,4 +47,6 @@ Bag.propTypes = {
   ).isRequired,
   removeProduct: PropTypes.func.isRequired,
   reduceQuantity: PropTypes.func.isRequired,
+  increaseQuantity: PropTypes.func.isRequired,
+  clearBag: PropTypes.func.isRequired,
 };

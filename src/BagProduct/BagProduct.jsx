@@ -3,7 +3,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './BagProduct.scss';
 
-export const BagProduct = ({ goodsInBag, removeProduct, reduceQuantity }) => (
+export const BagProduct = ({
+  goodsInBag,
+  removeProduct,
+  reduceQuantity,
+  increaseQuantity,
+}) => (
   <>
     { goodsInBag.map((good) => (
       <div className="bag-product" key={good.id}>
@@ -35,6 +40,7 @@ export const BagProduct = ({ goodsInBag, removeProduct, reduceQuantity }) => (
           <button
             type="button"
             className="bag-product__change-quantity"
+            onClick={() => increaseQuantity(good)}
           >
             +
           </button>
@@ -56,4 +62,5 @@ BagProduct.propTypes = {
   ).isRequired,
   removeProduct: PropTypes.func.isRequired,
   reduceQuantity: PropTypes.func.isRequired,
+  increaseQuantity: PropTypes.func.isRequired,
 };

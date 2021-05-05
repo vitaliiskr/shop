@@ -8,7 +8,7 @@ import { ProductList } from './ProductList/ProductList';
 import { Bag } from './Bag/Bag';
 
 function App() {
-  const [goodsInBag, addGoodsToBag] = useState([]);
+  const [goodsInBag, setGoodsInBag] = useState([]);
 
   // useEffect(() => {
 
@@ -18,7 +18,7 @@ function App() {
   const addGoods = (good) => {
     if (!goodsInBag.some((product) => product.id === good.id)) {
       const product = { ...good, quantity: 1 };
-      addGoodsToBag((prevGoodsinBag) => [...prevGoodsinBag, product]);
+      setGoodsInBag((prevGoodsinBag) => [...prevGoodsinBag, product]);
     } else {
       const addedProduct = goodsInBag.find((product) => product.id === good.id);
       addedProduct.quantity += 1;
@@ -26,13 +26,27 @@ function App() {
   };
 
   const removeProduct = (product) => {
-    addGoodsToBag((prev) => prev.filter((good) => good.id !== product.id));
+    setGoodsInBag((prevGoodsInBag) => prevGoodsInBag.filter((good) => good.id !== product.id));
   };
 
   const reduceQuantity = (product) => {
-    if (product.quantity > 0) {
-      // const selectedProduct = goodsInBag.find((good) => product.id === good.id);
+    if (product.quantity > 1) {
+      const selectedProduct = goodsInBag.find((good) => product.id === good.id);
+      selectedProduct.quantity -= 1;
+      setGoodsInBag((prevGoodsInBag) => [...prevGoodsInBag]);
+    } else {
+      setGoodsInBag((prevGoodsInBag) => prevGoodsInBag.filter((good) => good.id !== product.id));
     }
+  };
+
+  const increaseQuantity = (product) => {
+    const selectedProduct = goodsInBag.find((good) => product.id === good.id);
+    selectedProduct.quantity += 1;
+    setGoodsInBag((prevGoodsInBag) => [...prevGoodsInBag]);
+  };
+
+  const clear = () => {
+    setGoodsInBag([]);
   };
 
   return (
@@ -47,6 +61,8 @@ function App() {
           reduceQuantity={reduceQuantity}
           goodsInBag={goodsInBag}
           removeProduct={removeProduct}
+          increaseQuantity={increaseQuantity}
+          clearBag={clear}
         />
       </Route>
     </div>
