@@ -2,18 +2,14 @@
 import React, { useState } from 'react';
 import './App.css';
 import './Navigation.scss';
-import { Link, Route } from 'react-router-dom';
-import products from './products';
+import { Link, Route, Switch } from 'react-router-dom';
 import { ProductList } from './ProductList/ProductList';
 import { Bag } from './Bag/Bag';
 
+import products from './products';
+
 function App() {
   const [goodsInBag, setGoodsInBag] = useState([]);
-
-  // useEffect(() => {
-
-  // }, [goodsInBag]);
-  // const [page, setPage] = useState('/home');
 
   const addGoods = (good) => {
     if (!goodsInBag.some((product) => product.id === good.id)) {
@@ -53,18 +49,20 @@ function App() {
     <div className="App">
       <Link className="nav-link" to="/home">Products</Link>
       <Link className="nav-link nav-link-bag" to="/bag">Bag</Link>
-      <Route path="/home">
-        <ProductList products={products} addGoods={addGoods} />
-      </Route>
-      <Route path="/bag">
-        <Bag
-          reduceQuantity={reduceQuantity}
-          goodsInBag={goodsInBag}
-          removeProduct={removeProduct}
-          increaseQuantity={increaseQuantity}
-          clearBag={clear}
-        />
-      </Route>
+      <Switch>
+        <Route path="/bag">
+          <Bag
+            reduceQuantity={reduceQuantity}
+            goodsInBag={goodsInBag}
+            removeProduct={removeProduct}
+            increaseQuantity={increaseQuantity}
+            clearBag={clear}
+          />
+        </Route>
+        <Route path="/">
+          <ProductList products={products} addGoods={addGoods} />
+        </Route>
+      </Switch>
     </div>
   );
 }
