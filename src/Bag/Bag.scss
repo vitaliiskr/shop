@@ -1,0 +1,10 @@
+.bag {  
+  &__product {
+    display: flex;
+    justify-content: space-around;
+    height: 100px;
+    align-items: center;
+    margin: 10px 0;
+    background-color: gray;
+  }
+}

@@ -9,6 +9,10 @@ import { Bag } from './Bag/Bag';
 
 function App() {
   const [goodsInBag, addGoodsToBag] = useState([]);
+
+  // useEffect(() => {
+
+  // }, [goodsInBag]);
   // const [page, setPage] = useState('/home');
 
   const addGoods = (good) => {
@@ -16,9 +20,13 @@ function App() {
       const product = { ...good, quantity: 1 };
       addGoodsToBag((prevGoodsinBag) => [...prevGoodsinBag, product]);
     } else {
-      // goodsInBag.find((product) => product.id === good.id).quantity += 1;
-      // setIsQuantityApdated(true);
+      const addedProduct = goodsInBag.find((product) => product.id === good.id);
+      addedProduct.quantity += 1;
     }
+  };
+
+  const removeProduct = (product) => {
+    addGoodsToBag((prev) => prev.filter((good) => good.id !== product.id));
   };
 
   return (
@@ -29,7 +37,10 @@ function App() {
         <ProductList products={products} addGoods={addGoods} />
       </Route>
       <Route path="/bag">
-        <Bag goodsInBag={goodsInBag} />
+        <Bag
+          goodsInBag={goodsInBag}
+          removeProduct={removeProduct}
+        />
       </Route>
     </div>
   );
