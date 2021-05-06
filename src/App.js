@@ -1,15 +1,16 @@
 /* eslint-disable react/jsx-filename-extension */
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import './Navigation.scss';
 import { Link, Route, Switch } from 'react-router-dom';
 import { ProductList } from './ProductList/ProductList';
 import { Bag } from './Bag/Bag';
+import useLocalStorage from './LocalStorage';
 
 import products from './products';
 
 function App() {
-  const [goodsInBag, setGoodsInBag] = useState([]);
+  const [goodsInBag, setGoodsInBag] = useLocalStorage('goodsInBag', []);
 
   const addGoods = (good) => {
     if (!goodsInBag.some((product) => product.id === good.id)) {
@@ -18,10 +19,12 @@ function App() {
     } else {
       const addedProduct = goodsInBag.find((product) => product.id === good.id);
       addedProduct.quantity += 1;
+      setGoodsInBag((prevGoodsInBag) => [...prevGoodsInBag]);
     }
   };
 
   const removeProduct = (product) => {
+    // eslint-disable-next-line max-len
     setGoodsInBag((prevGoodsInBag) => prevGoodsInBag.filter((good) => good.id !== product.id));
   };
 
