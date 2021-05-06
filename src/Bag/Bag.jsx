@@ -25,6 +25,11 @@ export const Bag = ({
               increaseQuantity={increaseQuantity}
               clearBag={clearBag}
             />
+            <div>
+              {'Order All: '}
+              { goodsInBag.reduce((acum, good) => (good.price * good.quantity) + acum, 0) }
+              {' $.'}
+            </div>
             <button
               className="bag__button"
               type="button"
