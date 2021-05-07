@@ -50,8 +50,10 @@ function App() {
 
   return (
     <div className="App">
-      <Link className="nav-link" to="/home">Products</Link>
-      <Link className="nav-link nav-link-bag" to="/bag">Bag</Link>
+      <nav className="nav">
+        <Link className="nav__link" to="/home">Products</Link>
+        <Link className="nav__link nav-link-bag" to="/bag">Bag</Link>
+      </nav>
       <Switch>
         <Route path="/bag">
           <Bag
